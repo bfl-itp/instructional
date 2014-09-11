@@ -35,11 +35,23 @@ module.exports = function(grunt) {
           '!node_modules/**/*'
         ]
       }
+    },
+    'http-server': {
+      'dev': {
+        root: '.',
+        port: 3000,
+        host: "127.0.0.1",
+        cache: 1,
+        showDir : true,
+        autoIndex: true,
+        ext: "html"
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-html-validation');
+  grunt.loadNpmTasks('grunt-http-server');
 
   grunt.registerTask('default', ['jshint', 'validation']);
 };
