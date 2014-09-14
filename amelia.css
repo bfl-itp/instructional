@@ -1,5 +1,32 @@
 body {
-  background-image: url("http://inventioninbrooklyn.com/learning/Lego.jpg");
-  background-position: 50% 50%;
-  background-repeat: repeat;
+    background-image: url("http://inventioninbrooklyn.com/learning/Lego.jpg");
+    background-position: 50% 50%;
+    background-repeat: repeat;
+}
+
+.main {
+    width: 500px;
+    border: 1px solid black;
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+.textbox {
+    background:green;
+    width: 700px;
+    float:left; /* add this */
+    /*border: 1px solid red;*/
+}
+.vimeo {
+    border: 1px solid green;
+    overflow: hidden; /* if you don't want #second to wrap below #first */
+}
+
+@media only screen and (min-width: 481px) {
+
+  div.vimeo {
+ width: 50%;
+margin-left: 10%;
+margin-right: 5%;
+  clear: none;
+  float: left;
+}
 }
