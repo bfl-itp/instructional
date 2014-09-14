@@ -6,24 +6,17 @@ body {
 
 .main {
     width: auto;
-    padding-left:10%;
-    overflow: hidden; /* will contain if #first is longer than #second */
+    padding-left:20%;
+    padding-right:20%;
 }
 .textbox {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+    width:610px;
+    height:600px;
     background:yellow;
-    float:left; 
-
-}
-.vimeo {
+    padding-left:.5%;
+    overflow:scroll;
 }
 
-@media only screen and (min-width: 481px) {
 
-  div.vimeo {
- width: 50%;
-margin-left: 10%;
-margin-right: 5%;
-  clear: none;
-  float: left;
-}
-}
