@@ -11,3 +11,6 @@
 > Take the [first week's](https://github.com/bfl-itp/syllabus/blob/master/schedule.md#sep-4) offline Instructional Thing assignment online. Reimagine it for (and take advantage of) the new medium.
 
 *Describe your project here – explain the evolution*
+
+
+[Amelia's Proj#1](http://vimeo.com/105842915)
