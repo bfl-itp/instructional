@@ -1,0 +1,160 @@
+
+body{
+	font-family: Helvetica, georgia, sans-serif;
+	text-align: center;
+	background-color: white;
+	background-size: 80%;
+}
+
+h1{
+    margin-left: -50px;
+	margin-top: 50px;
+	margin-bottom: 10px;
+    font-weight: 20px;
+    font-size: 80px;
+    text-align: left;
+
+
+}
+
+
+.thumbnails{
+	word-spacing: 100px;
+	margin: 80px;
+	padding-right: 20px;
+	cursor:pointer;
+}
+
+.thumb{
+	width: 65px;
+	height: 65px;
+	border: 5px solid black;
+	margin-right: 10px;
+	
+}
+
+#carousel {
+	width:32%;
+	float:center;
+	margin-top:50px;
+	margin-left: 25%;
+	border: 5px solid black;
+	background-color: black;
+	margin-left:550px;
+
+}
+
+#logo{
+	float:left;
+	margin-left: 220px;
+}
+
+#imageHolder{
+    margin-top: 0px;
+
+}
+
+#tops{
+
+display: inline;
+
+}
+
+#controlPanel{
+	float:center;
+}
+
+.button{
+	cursor:pointer;
+	background-color: black;
+	color: white;
+	border-radius: 10px;
+	text-align: center;
+	padding: 20px;
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-top: -50px;
+	cursor: pointer;
+	margin-bottom: 120px;
+
+}
+
+footer{
+	float:center;
+	margin:100px;
+}
+
+.nav{
+	margin-bottom: 20px;
+}
+
+
+ul a{
+	text-decoration: none;
+	color: black;
+	}
+
+ul {
+  text-decoration: none;
+  text-align: left;
+  display: inline;
+  font-family: Helvetica;
+  color:black;
+  padding: 15px 4px 170px 0;
+  list-style: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+ul li {
+  text-decoration: none;
+  font: bold 12px/18px sans-serif;
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 15px 20px;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+ul li:hover {
+  background: #d3d3d3;
+  color: #d3d3d3;
+}
+ul li ul {
+  padding: 0;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 150px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+}
+ul li ul li { 
+  background: white; 
+  display: block; 
+  color: #d3d3d3;
+  text-shadow: 0 -1px 0 #000;
+}
+ul li ul li:hover { background: #d3d3d3; }
+ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
