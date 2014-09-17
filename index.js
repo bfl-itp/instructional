@@ -2,24 +2,27 @@ Zepto(function($){
 	var $canvas = $('#canvas');
 	var ctx = $canvas[0].getContext('2d');
 
-	var headLine = 200;
-	var armLine = 400;
-
-	var all = [];
 	var none = [];
+	var parts = [];
 
-	var attached = [false,false,false,false,false];
+	var attached = [true,true,true,true,true];
 
 	function mouseMove(e) {
 		var x = (e.pageX - $canvas.offset().left) / $canvas.width();
 		var bucket = Math.floor(x * 5) - 2;
-		ctx.drawImage(all[bucket] , 0, 0);
-		ctx.drawImage(none[bucket] , 0, 0, 200, 400, 0, 0, 200, 400);
+		if (bucket < -2) bucket = -2;
+		if (bucket > 2) bucket = 2;
+		ctx.drawImage(none[bucket], 0, 0);
+		for (var i = 0; i < attached.length;i++) {
+			if (attached[i]) {
+				ctx.drawImage(parts[i][bucket], 0,0);
+			}
+		}
 	}
 	
 	function loadImages(update, then) {
 		var count = 0;
-		var totalImages = 10;
+		var totalImages = 30;
 
 		function imageLoaded() {
 			count++;
@@ -29,14 +32,21 @@ Zepto(function($){
 			}
 		}
 
-		// Load parts images
-		for (var i = 0; i < 2; i++) {
-			var an = ["all", "none"][i];
-			var set = [all,none][i];
+		// Load backgrounds
+		for (var p = -2; p <= 2; p++) {
+			var filename = 'images/img' + p + 'none.jpeg';
+			var img = new Image();
+		  none[p] = img;
+		  img.onload = imageLoaded;
+		  img.src = filename;
+		}
+
+		for (var i = 0; i < 5; i++) {
+			parts[i] = [];
 			for (var p = -2; p <= 2; p++) {
-				var filename = 'images/img' + p + an + '.jpeg';
+				var filename = 'images/img' + i + p + '.png';
 				var img = new Image();
-			  set[p] = img;
+			  parts[i][p] = img;
 			  img.onload = imageLoaded;
 			  img.src = filename;
 			}
