@@ -1,27 +1,43 @@
 body {
     background-image: url("http://inventioninbrooklyn.com/learning/Lego.jpg");
-    background-position: 50% 50%;
     background-repeat: repeat;
+    margin-top: 0px;
+    margin-bottom:0px;
 }
 
 .main {
-    width: 100%;
-    padding-left:10%;
-    padding-right:10%;
+    margin-left:10%;
+    margin-right:10%;
+    background:black;
+    height:100%;
+    width:78%;
+    float:center;
+    position:absolute;
 }
+
 .textbox {
+    padding-left:2%;
+    padding-top:2%;
     position: relative;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    font-color: ;
+    color: #FFFFFF;
     font-size: 18px;
-    width:75%;
-    height:60%;
-    background:black;
+}
+
+.listbox {
+    padding-left:2%;
+    padding-top:2%;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-size: 14px;
+    position: relative;
 }
 
 .videoWrapper {
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
+  padding-left:30%;
   padding-top: 25px;
   height: 0;
 }
