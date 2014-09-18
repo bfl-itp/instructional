@@ -12,10 +12,4 @@
 
 *[Link to instructional HTML page](http://sighrobot.github.io/instructional/)*
 
-### Making the piano cutout printable
-
-I wanted to make a webpage that could be printed to allow the user to cut out an actual size template like that one I made by hand. This hasn't quite been achieved; the user can print out two templates but the sizing is not correct.
-
-Additional research is needed to determine how to scale real-world measurements when printing. CSS lets you specify unites like inches and centimeters but according to some sources these values are simply mapped to pixel amounts. Also, things like virtual rulers that have real-world dimensions on your screen don't automatically print at that size.
-
-I added some instructions to aid in the templates' use because I realized that I was taking for granted to ability to identify an octave starting at C. Keeping with the highly visual language component of my project, I included a simple graphic showing what to look for (i.e. 2 black keys followed by 3 black keys), which will always be the case on a standard keyboard.
+*[Link to blog post](http://itp.aberubenste.in/2014/09/instructional-thing-on-web.html)*
