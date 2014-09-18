@@ -1,0 +1,971 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html style="height:100%;" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Budiu</title>
+
+
+<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+<script src="p5.js"></script>
+
+<script>
+//this seems much easier to use than the coda!!!! very good!
+
+//Onload Events//
+$(document).ready(function(){
+
+//-----------Setting Easing Style--------------------------//
+jQuery.easing.def="easeInOutExpo";
+
+//-----------Setting UA------------------------------------//
+if((navigator.userAgent.match(/iPhone/i))) {
+        alert("developing!");
+        }
+
+else if((navigator.userAgent.match(/iPad/i))) {
+        //alert("developing!");
+        alert("developing!");
+        }
+
+else if((navigator.userAgent.match(/Android/i))) {
+        alert("developing!");
+        }
+
+
+else{
+      AutoLayout();
+    }
+});
+
+
+//-------------------------Resize---------------------//
+
+window.onresize = function(){
+AutoLayout();
+}
+
+//------------------------Auto Layout---------------------//
+
+
+function AutoLayout(){
+    //--------------------Setting Page Height---------------------//
+
+BrowserHeight=document.getElementById("BrowserHeight").offsetHeight;
+BrowserWidth=document.getElementById("BrowserHeight").offsetWidth;
+
+/*Alt Layout
+if(BrowserHeight<=650){
+    BrowserHeight=650;   
+}
+else if(BrowserHeight<=800 && BrowserHeight>650){   
+}
+else if(BrowserHeight>800){ 
+}
+*/
+
+Container.style.height = BrowserHeight+"px";
+
+//----------Section Height------------------------------------//
+Page1.style.height = BrowserHeight+"px";
+Page2.style.height = BrowserHeight+"px";
+Page3.style.height = BrowserHeight+"px";
+Page4.style.height = BrowserHeight+"px";
+Page5.style.height = BrowserHeight+"px";
+Page6.style.height = BrowserHeight+"px";
+
+PotHandle.style.width = 0.588*0.641*BrowserHeight+"px";
+TeaCup1.style.width = 0.21*BrowserHeight+"px";
+Leaf.style.width = 0.14*BrowserHeight+"px";
+
+}
+
+//-----------------fade chain-------------------------//
+
+window.onload = function(){
+setTimeout("FadeInPot()",500);
+Cover.style.opacity = 0;
+}
+
+function FadeInPot(){
+    $("#PotHandle").animate({opacity:1},900,'jswing');
+    setTimeout("FadeInLeaf()",700);
+}
+
+function FadeInLeaf(){
+    $("#Leaf").animate({opacity:1},900,'jswing');
+    setTimeout("FadeInCup()",700);
+}
+
+function FadeInCup(){
+    $("#TeaCup1").animate({opacity:1},1201,'jswing');
+}
+
+//------------------------------------------//
+
+
+//----------------------P5----------------------------//
+function setup(){
+
+var IndexCanvas = createCanvas(WaterBall.offsetWidth,WaterBall.offsetHeight);
+IndexCanvas.id("Index_Teawater_Canvas");
+IndexCanvas.parent("WaterBall");
+
+}
+ 
+var WaveY1;
+var WaveY2;
+
+function draw(){
+
+
+clear();
+
+
+WaveX1= ((parseInt($(TeaMove_Compute).css('width'))) /500*width);
+WaveX2= ((1-(parseInt($(TeaMove_Compute).css('width'))) /500)*width);
+
+WaveY1= (parseInt($(TeaMove_Compute).css('height')))/10*0.09;
+WaveY2= (parseInt($(TeaMove_Compute).css('height')))/10*0.07;
+
+
+noStroke();
+
+fill(223,237,231,100);
+
+beginShape();
+//------------wave-----------------------//
+vertex(-200,0);
+//quadraticVertex(width*0.5, height*0.65,-50,height*0.38);
+quadraticVertex(WaveX1, height*WaveY1,width+50,0);
+vertex(width+200,0);
+//---------------------------------------//
+vertex(width+200,-200);
+vertex(-200,-200);
+//---------------------------------------//
+endShape(CLOSE);
+
+fill(255,180);
+
+beginShape();
+//------------wave-----------------------//
+vertex(-200,0);
+quadraticVertex(WaveX2, height*WaveY2,width+50,0);
+vertex(width+200,0);
+//---------------------------------------//
+vertex(width+200,-200);
+vertex(-200,-200);
+//---------------------------------------//
+endShape(CLOSE);
+
+fill(0,0,0,100);
+
+}
+
+
+
+//Ready for Scroll down//
+var SlideReady=1;
+
+var m=0;
+
+window.onmousewheel = function(){
+	
+	m = event.wheelDelta/6;
+	
+	if(SlideReady==0){return false;}
+	if(m<1.8 && m>-1.8){return false;}
+
+	else{
+
+      OnSlide();
+	}
+	
+}
+
+
+//---------------------KeyBoard Control---------------//
+
+//Set Keystatus
+
+var k=0;
+
+window.onkeydown = function(){
+   
+
+    if(event.keyCode==38){
+        k=1;
+        OnSlide();
+        
+    }
+    
+    else if(event.keyCode==40){
+        k=-1;
+        OnSlide();
+        
+    }
+    
+    
+}
+
+window.onkeyup = function(){
+   
+   k=0;
+}
+
+//----------------------------------------------------//
+
+
+
+function OnSlide(){
+
+
+var t = -1*parseInt($(Slider).css('marginTop'))
+
+
+var SlideDown = (m<0 || k==-1);
+var SlideUp = (m>0 || k==1);
+
+
+if(t>=0 && t<1*BrowserHeight){
+
+    if(SlideReady==1){
+    if(SlideDown){
+        
+    ToPage2();
+    ScrollDownSign.style.display="none";
+    }
+    }
+	
+}
+
+if(t>=1*BrowserHeight && t<2*BrowserHeight){
+    
+    //Set PageStatus to 2;
+	if(SlideReady==1){
+
+    if(SlideDown){
+    ToPage3();
+    }
+    else if(SlideUp){
+    ToPage1();
+    }
+
+	}
+
+}
+
+
+if(t>=2*BrowserHeight && t<3*BrowserHeight){
+    //Set PageStatus to 3;
+    if(SlideReady==1){ 	
+
+    if(SlideDown){
+    ToPage4();
+    }
+    else if(SlideUp){
+    ToPage2();
+    }
+
+    }
+}
+
+
+if(t>=3*BrowserHeight && t<4*BrowserHeight){
+    //Set PageStatus to 4;
+    if(SlideReady==1){
+
+    if(SlideDown){
+    ToPage5();
+    }
+    else if(SlideUp){
+    ToPage3();
+    }
+
+	}
+
+}
+
+if(t>=4*BrowserHeight && t<5*BrowserHeight){
+    //Set PageStatus to 5;
+    if(SlideReady==1){
+
+    if(SlideDown){
+    ToPage6();
+    }
+    else if(SlideUp){
+    ToPage4();
+    }
+
+	}
+ }
+
+if(t>=5*BrowserHeight && t<5*BrowserHeight+320){
+    //Set PageStatus to Page6;
+    if(SlideReady==1){
+
+    if(SlideUp){
+    ToPage5();
+    }
+
+    else if(SlideDown){
+    ToBottom();
+    }
+
+	}
+ }
+
+ if(t>=5*BrowserHeight+320){
+    //Set PageStatus to bottom;
+    if(SlideReady==1){
+
+    if(SlideUp){
+    ToPage6();
+    }
+
+    }
+ }
+
+k=0;
+
+}
+
+
+//--------------------------------Side_Nav & Page_Move------------------------------------//
+
+function ToPage1(){
+
+    SN1.style.backgroundColor="#FFF";
+    SN2.style.backgroundColor="#CCC";
+    SN3.style.backgroundColor="#CCC";
+    SN4.style.backgroundColor="#CCC";
+    SN5.style.backgroundColor="#CCC";
+    SN6.style.backgroundColor="#CCC";
+
+    $("#TeaCup1").animate({bottom:'16.5%'},1350);
+    $("#Leaf").animate({bottom:'24%'},1400);
+    //$("#WaterBall").animate({top:'47.5%'},1400);
+    WaterBall.style.backgroundImage = "url(TeawaterBack.png)";
+
+
+	if(SlideReady==1){SlideReady=0; setTimeout("SlideWait()",1400);}
+	$("#Slider").animate({marginTop:0*BrowserHeight},1201);
+
+}
+
+function ToPage2(){
+    SN1.style.backgroundColor="#CCC";
+    SN2.style.backgroundColor="#FFF";
+    SN3.style.backgroundColor="#CCC";
+    SN4.style.backgroundColor="#CCC";
+    SN5.style.backgroundColor="#CCC";
+    SN6.style.backgroundColor="#CCC";
+    
+    $("#TeaCup1").animate({bottom:'105%'},900);
+    $("#Leaf").animate({bottom:'120%'},700);
+    WaterBall.style.backgroundColor = "rgba(229,241,224,1)";
+    WaterBall.style.backgroundImage = "url(none.png)";
+
+	if(SlideReady==1){SlideReady=0; setTimeout("SlideWait()",1400);}
+	$("#Slider").animate({marginTop:-1*BrowserHeight},1201);
+
+}
+
+
+function ToPage3(){
+    SN1.style.backgroundColor="#CCC";
+    SN2.style.backgroundColor="#CCC";
+    SN3.style.backgroundColor="#FFF";
+    SN4.style.backgroundColor="#CCC";
+    SN5.style.backgroundColor="#CCC";
+    SN6.style.backgroundColor="#CCC";
+
+	if(SlideReady==1){SlideReady=0; setTimeout("SlideWait()",1400);}
+	$("#Slider").animate({marginTop:-2*BrowserHeight},1201);
+
+}
+
+function ToPage4(){
+    SN1.style.backgroundColor="#CCC";
+    SN2.style.backgroundColor="#CCC";
+    SN3.style.backgroundColor="#CCC";
+    SN4.style.backgroundColor="#FFF";
+    SN5.style.backgroundColor="#CCC";
+    SN6.style.backgroundColor="#CCC";
+
+	if(SlideReady==1){SlideReady=0; setTimeout("SlideWait()",1400);}
+	$("#Slider").animate({marginTop:-3*BrowserHeight},1201);
+
+}
+
+function ToPage5(){
+    SN1.style.backgroundColor="#CCC";
+    SN2.style.backgroundColor="#CCC";
+    SN3.style.backgroundColor="#CCC";
+    SN4.style.backgroundColor="#CCC";
+    SN5.style.backgroundColor="#FFF";
+    SN6.style.backgroundColor="#CCC";
+
+	if(SlideReady==1){SlideReady=0; setTimeout("SlideWait()",1400);}
+	$("#Slider").animate({marginTop:-4*BrowserHeight},1201);
+
+}
+
+function ToPage6(){
+    SN1.style.backgroundColor="#CCC";
+    SN2.style.backgroundColor="#CCC";
+    SN3.style.backgroundColor="#CCC";
+    SN4.style.backgroundColor="#CCC";
+    SN5.style.backgroundColor="#CCC";
+    SN6.style.backgroundColor="#FFF";
+
+	if(SlideReady==1){SlideReady=0; setTimeout("SlideWait()",1400);}
+	$("#Slider").animate({marginTop:-5*BrowserHeight},1201);
+
+}
+
+/*
+var SetBottom=0;
+
+function ToBottom(){
+
+    SetBottom=1;
+
+    if(SlideReady==1){SlideReady=0; setTimeout("SlideWait()",1400);}
+    //$("#Page3VideoBox").animate({top:-1*BrowserHeight},1201,SetVideo3Out());
+    //$("#Page4VideoBox").animate({top:-1*BrowserHeight},1201,SetVideo4Out());
+
+    
+    $("#Slider").animate({marginTop:-5*BrowserHeight-380},1201);
+    ScrollDownSign.style.display="none";
+
+}
+*/
+
+//---------------------------------Slide_Wait------------------------------------------//
+
+function SlideWait(){
+
+
+SlideReady=1;
+/*
+if(SetBottom==0){
+ScrollDownSign.style.display="block";
+}
+else if(SetBottom==1){
+ScrollDownSign.style.display="none";
+}
+SetBottom=0;
+*/
+
+clearTimeout("SlideWait()");
+
+}
+
+
+
+
+</script>
+
+<style>
+
+html {}
+
+body{
+
+	margin:0px;
+	height:100%;
+	color: #5d6259;
+	}
+	
+		
+#BrowserHeight{
+	height:100%;
+	width:100%;
+	position:fixed;
+	z-index:-99999999;
+    visibility:hidden;
+    overflow: hidden;
+	}
+		
+		
+
+#Container{
+	width:100%;
+	min-width:1024px; 
+	z-index:99;
+	}
+
+
+#Side_Nav{
+     height: 135px;
+     width: 30px;
+     position: fixed;
+     top:43%; 
+     right:20px;
+     
+}
+
+.SideSign{
+	height:12px;
+	width: 12px;
+	margin: 10px auto 10px auto;
+	background-color: #CCC;
+	opacity: 0.8;
+	border-radius: 10px;
+	cursor: pointer;
+}
+	
+#SN1{
+	
+	background-color: #FFF;
+}
+		
+.Section{
+	height:20%;
+	min-height:650px;
+	overflow: hidden;
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+
+#Page1{
+    background: url(MainBack.jpg) no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+#Cover{
+top: 0px;
+left: 0px;
+position: absolute;
+z-index: 99;
+width: 100%;
+height: 100%;
+background-color: rgb(255,255,255);
+opacity: 1;
+-webkit-transition: opacity 2s ease-out ;
+}
+
+
+#desktop{
+    height:100%;
+    width: 100%;
+    background: url(Desk.png) no-repeat;
+    background-size: 100% 62%;
+    background-position: center 162.2%;
+    
+}
+
+#PotHandle{
+    position: absolute;
+    bottom:18%;
+    left: 50%;
+    height: 64.1%;
+    opacity: 0;
+    background-image: url(PotHandle.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:top;
+}
+
+#TeaPot{
+    position: relative;
+    overflow:hidden;
+    height:78%;
+    width: 80%;
+    top:21.7%;
+    left:15%;
+    background-image: url(PotTop.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:top;
+    
+}
+
+#Index_Teawater_Canvas{z-index: 1;}
+
+#WaterBall{
+    padding: 0px;
+    position: relative;
+    height: 53%;
+    width: 85.5%;
+    top: 47.5%;
+    left:0px;
+    right:0px;
+    margin: auto;
+    background-size: 100% 100%;
+    background-position: 1px -1px;
+    background-repeat: no-repeat;
+    background-image:url(TeawaterBack.png);
+    overflow:hidden;
+    border-bottom-left-radius: 30.9%;
+    border-bottom-right-radius: 30.9%;
+    -webkit-transition: all 0.8s ease-out;
+    -moz-transition: all 0.8s ease-out;
+
+}
+
+#TeaCup1{
+    opacity: 0;
+    position: absolute;
+    bottom:16.5%;
+    left:64%;
+    height: 21%;
+    background-image: url(ShadowCup.png);
+    background-size: 82%;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    padding-bottom:0.42%; 
+    padding-right: 0.6%;
+}
+
+#TeaCupIn{
+    height: 100%;
+    width: 100%;
+    background-image: url(TeaCup1.svg);
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+}
+
+#Leaf{
+    opacity: 0;
+    position: absolute;
+    bottom:24%;
+    left:29%;
+    height: 12%;
+    background-image: url(Leaf.svg);
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+canvas #Index_Teawater_Canvas{
+    margin: 0px;
+    margin-top: -2px;
+}
+
+
+
+#TeaMove_Compute{
+    background-color:#FF9900;
+    height: 0px;
+    width: 0px;
+    display: none;
+    position: fixed;
+    z-index: 999999;
+    top: 0px;
+
+}
+
+#TitleBox{
+    position: relative;
+    left: 15%;
+    top:130px;
+}
+
+.Title{
+    text-align: center;
+    width: 400px;
+    margin: 0px;
+    color: rgba(255,255,255,0.85);
+    font-size: 6.0em;
+    word-spacing: 1em;
+    line-height: 0.9em;
+    font-family: "Orator Std","Myriad Set Pro","Lucida Grande","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+}
+
+#SubTitle{
+    text-align: center;
+    width: 400px;
+    padding-top:0px;
+    margin: 0px;
+    /*color: rgba(255,255,255,0.6);*/
+    color: #777;
+    font-size: 1.6em;
+    word-spacing: 0.2em;
+    font-family: "Orator Std","Myriad Set Pro","Lucida Grande","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+}
+
+/*
+
+#Page2{
+	background-color:#EEE;
+}
+
+
+
+#Page3{
+    background: transparent;
+	background-color: #befb07;
+	background-image: url(Img/Page1_3_5_bg.jpg);
+}
+
+
+#Page4{
+	overflow: hidden;
+	padding-top:1px; 
+}
+
+#Page4_Text{
+padding-top:13%; 
+width: 50%;
+margin-left: 25%;
+height: 0px;
+opacity: 0;
+}
+
+
+#Page5{
+	background-color: #befb07;
+	background-image: url(Img/Page1_3_5_bg.jpg);
+}
+
+#Page6{
+	background-color:#EEE;
+}
+
+
+#Footer{
+	height:400px;
+	width: 100%;
+	background-color: #25405b;
+	padding-top: 1px;
+}
+
+#FooterPic{
+    height: 196px;
+    width: 65%;
+    max-width: 1080px;
+    background-image: url(Img/Bottom.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+    margin:15px auto auto auto;
+
+}
+
+#FootItemBox{
+width: 46%;
+max-width: 1280px;
+min-width: 920px;
+margin: 0px auto auto auto;
+height: 45px;
+}
+
+.FootItem{
+    text-align: center;
+	height: 30px;
+	float: left;
+	width: 25%;
+    padding-top: 25px; 
+    color:#b6fc05;
+    line-height: 2em;
+    cursor: pointer;
+}
+
+#Copyright{
+    margin-top: 45px;
+    padding-top: 5px;
+    color: #6e7f91;
+    text-align:center;
+    font-size: 6px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 650px;
+    height: 60px;
+}
+
+*/
+
+</style>
+
+
+</head>
+
+
+<body>
+
+<div id="BrowserHeight">
+</div>
+
+<div id="Cover" >
+</div>
+
+<div id="TeaMove_Compute">
+</div>
+
+<div id="Container" style="overflow:hidden;">
+
+<div id="ScrollDownSign">
+</div>
+
+
+<div id="Side_Nav">
+<div class="SideSign" id="SN1" onclick="ToPage1()"></div>
+<div class="SideSign" id="SN2" onclick="ToPage2()"></div>
+<div class="SideSign" id="SN3" onclick="ToPage3()"></div>
+<div class="SideSign" id="SN4" onclick="ToPage4()"></div>
+<div class="SideSign" id="SN5" onclick="ToPage5()"></div>
+<div class="SideSign" id="SN6" onclick="ToPage6()"></div>
+</div>
+
+<div id="Slider">
+
+<div class="Section" id="Page1" style="background-color:#AAA;">
+<div id="desktop" style="position:relative;">
+
+<div id="TitleBox">
+<p class="Title">TEA</p>
+<p id="SubTitle">4 STEP <span style="font-size:1.6em; color:rgba(255,255,255,0.6);">●</span> TO MAKE TEA</p>
+<p class="Title" style="padding-top:0px;">TIME</p>
+</div>
+
+</div>
+
+<div id="PotHandle">
+<div style="height:100%; width:100%; background:url(ShadowPot.png) no-repeat; background-size:82%; background-position:right bottom; padding-bottom:3.5%;">
+<div id="TeaPot">
+
+<div id="WaterBall">
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="TeaCup1">
+<div id="TeaCupIn">
+</div>
+</div>
+
+<div id="Leaf">
+</div>
+
+</div>
+
+<div class="Section" id="Page2" style="background-color:#CCC;">
+
+
+</div>
+
+
+<div class="Section" id="Page3" style="background-color:#DDD;">
+
+</div>
+
+<div class="Section" id="Page4" style="background-color:#AAA;">
+
+</div>
+
+<div class="Section" id="Page5" style="background-color:#CCC;">
+
+</div>
+
+<div class="Section" id="Page6" style="background-color:#DDD;">    
+
+
+</div>    
+
+</div>
+
+</div>
+
+
+</body>
+
+
+<script>
+
+
+var MouseX;
+//var MouseY;
+var PMouseX;
+//var PMouseY;
+
+var DeltaX;
+//var DeltaY;
+
+var MoveRatioX;
+//var MoveRatioY;
+
+var TeaFlat=1;
+
+Cover.onmouseover=function(e){
+
+        PMouseX = e.pageX;
+        //PMouseY = e.pageY;
+}
+
+Cover.onmousemove=function(e){
+        
+        MouseX = e.pageX;
+        MoveRatioX = MouseX / BrowserWidth;
+        DeltaX = MouseX- PMouseX;
+        PMouseX=MouseX;
+
+        /*
+        MouseY = e.pageY;
+        MoveRatioY = MouseY / BrowserHeight;
+        DeltaY = MouseY- PMouseY;
+        PMouseY=MouseY;
+        */
+
+        PotHandle.style.left =  BrowserWidth*0.5 - ((MoveRatioX-0.5)*36) + "px";
+        //PotHandle.style.bottom =  BrowserHeight*0.18 + ((MoveRatioY-0.5)*30) + "px";
+
+        TeaCup1.style.left =  BrowserWidth*0.64 - ((MoveRatioX-0.5)*48) + "px";
+        Leaf.style.left =  BrowserWidth*0.29 - ((MoveRatioX-0.5)*28) + "px";
+        //desktop.style.left =  0 - ((MoveRatioX-0.5)*20) + "px";
+
+        if(DeltaX>=1){
+
+            if(TeaFlat==1){
+              TeaFlat=0;
+              
+              $("#TeaMove_Compute").animate({width:700,height:40},400,'easeOutSine');setTimeout("PutTeaFlat()",2520);
+              $("#TeaMove_Compute").animate({width:-200,height:31},500,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:600,height:23},400,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:-100,height:16},400,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:500,height:10},350,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:0,height:5},300,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:400,height:3},240,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:100,height:2},170,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:300,height:2},90,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:200,height:1},45,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:250,height:0},20,'easeOutSine');
+
+            }
+
+        }
+        else if(DeltaX<=-1){}
+            if(TeaFlat==1){
+              TeaFlat=0;
+
+              $("#TeaMove_Compute").animate({width:-200,height:40},450,'easeOutSine');setTimeout("PutTeaFlat()",2520);
+              $("#TeaMove_Compute").animate({width:700,height:31},500,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:-100,height:23},400,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:600,height:16},400,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:0,height:10},350,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:500,height:5},300,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:100,height:3},240,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:400,height:2},170,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:200,height:2},90,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:300,height:1},45,'easeOutSine');
+              $("#TeaMove_Compute").animate({width:250,height:0},20,'easeOutSine');
+            }
+}
+
+function PutTeaFlat(){
+        TeaFlat=1;
+        clearTimeout("PutTeaFlat()");
+}
+</script>
+
+
+
+</html>
