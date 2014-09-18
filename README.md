@@ -10,7 +10,7 @@
 
 > Take the [first week's](https://github.com/bfl-itp/syllabus/blob/master/schedule.md#sep-4) offline Instructional Thing assignment online. Reimagine it for (and take advantage of) the new medium. For example: if Part I was a stop-frame animation, Part II might be a slideshow where the user can click between the steps.
 
-*Describe your project here – explain the evolution, and what was gained and lost from using this new medium*
+*[Link to instructional HTML page](http://sighrobot.github.io/instructional/)*
 
 ### Making the piano cutout printable
 
