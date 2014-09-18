@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html> 
+<head> 
+	<script> 
+	var stepindex = 1;
+	function changeImage()
+	{
+		var img = document.getElementById("image");
+		
+		if (stepindex == 1){
+			img.src="images/step2.svg";
+			stepindex = 2;
+		}
+		else if (stepindex == 2){
+			img.src="images/step3.svg";
+			stepindex = 3;
+		}
+		else if (stepindex == 3){
+			img.src="images/step4.svg";
+			stepindex = 4;
+		}
+		else if (stepindex == 4){
+			img.src="images/step5.svg";
+			stepindex = 5;
+		}
+		else if (stepindex == 5){
+			img.src="images/step6.svg";
+			stepindex = 6;
+		}
+		else if (stepindex == 6){
+			img.src="images/step7.svg";
+			stepindex = 7;
+		}
+		else if (stepindex == 7){
+			img.src="images/step8.svg";
+			stepindex = 8;
+		}
+		else if (stepindex == 8){
+			img.src="images/step1.svg";
+			stepindex = 1;
+		}
+
+		return false;
+	}
+
+	</script>
+
+</head>
+<body>
+	<center>
+	<h2> How to braid hair tutorial! </h2>
+	<img id="image" src="images/step1.svg"/>
+	<br><br>
+	<button id="clickme" onclick="changeImage();">Click to see the next step!</button>
+	</center>
+	</body>
+</html>
+
