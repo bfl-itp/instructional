@@ -1,9 +1,310 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <title>So-and-so's Instructional Assignment</title>
-  </head>
-  <body>
-    YOUR CODE HERE
-  </body>
-</html>
+<head>
+  <style>
+  body {
+    font-family: sans-serif;
+    color:#333;
+  }
+
+  #wrapper {
+    margin:0 auto;
+    width:1000px;
+  }
+
+  canvas#c1 {
+    width:10in;
+    height:4.25in;
+    /*border:1px solid gray;*/
+  }
+
+  canvas#c2 {
+    width:10in;
+    height:3.75in;
+    /*border:1px solid gray;*/
+  } 
+   svg#piano {
+    vertical-align:middle;
+   }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <h1 style="text-transform:uppercase;">Print-your-own piano helper template</h1>
+
+    <h3>
+      <ol>
+        <li>Print this page</li>
+        <li>Cut out both templates</li>
+        <li>Fold on dotted lines marked FOLD</li>
+        <li>Identify a section of keyboard with 2 black keys before 3 black keys &rarr;&nbsp;
+          <svg id="piano" xml:space="preserve" width="161px" height="120">
+<!--
+ 
+     Copyright (c)  2005 Lauri Kaila.
+     Permission is granted to copy, distribute and/or modify this document
+     under the terms of the GNU Free Documentation License, Version 1.2
+     or any later version published by the Free Software Foundation;
+     with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+     A copy of the license is included in the section entitled "GNU
+     Free Documentation License".
+     
+     
+     
+     Intented to create a keyboard where key widths are
+     accurately in position. 
+     
+     See http://www.mathpages.com/home/kmath043.htm
+     for the math.
+     
+     This keyboard has following properties (x=octave width).
+     1. All white keys have equal width in front (W=x/7).
+     2. All black keys have equal width (B=x/12).
+     3. The narrow part of white keys C, D and E is W - B*2/3
+     4. The narrow part of white keys F, G, A, and B is W - B*3/4
+     
+-->
+<!--  White keys   -->
+<rect style="fill:white;stroke:black" x="0" y="0" width="23" height="120"/>
+<rect style="fill:white;stroke:black" x="23" y="0" width="23" height="120"/>
+<rect style="fill:white;stroke:black" x="46" y="0" width="23" height="120"/>
+<rect style="fill:white;stroke:black" x="69" y="0" width="23" height="120"/>
+<rect style="fill:white;stroke:black" x="92" y="0" width="23" height="120"/>
+<rect style="fill:white;stroke:black" x="115" y="0" width="23" height="120"/>
+<rect style="fill:white;stroke:black" x="138" y="0" width="23" height="120"/>
+<!--  Black keys (overlap with the white keys)  -->
+<rect style="fill:black;stroke:black" x="14.33333" y="0" width="13" height="80"/>
+<rect style="fill:black;stroke:black" x="41.66666" y="0" width="13" height="80"/>
+<rect style="fill:black;stroke:black" x="82.25" y="0" width="13" height="80"/>
+<rect style="fill:black;stroke:black" x="108.25" y="0" width="13" height="80"/>
+<rect style="fill:black;stroke:black" x="134.75" y="0" width="13" height="80"/>
+</svg>
+        </li>
+        <li>Place larger cutout over this part of keyboard.</li>
+        <li>Insert folded flaps into space between keys.</li>
+        <li>Place smaller cutout on top of larger cutout.</li>
+        <li>Simultaneously press keys designated by the dots to play chords.</li>
+      </ol>
+    </h3>
+
+    <canvas id="c1" width="1000" height="425" ></canvas>
+
+    <canvas id="c2" width="1000" height="375"></canvas>
+
+
+
+    <script>
+    var canvas1 = document.getElementById('c1');
+    var c1 = canvas1.getContext('2d');
+
+    var canvas2 = document.getElementById('c2');
+    var c2 = canvas2.getContext('2d');
+
+
+
+    drawTemplateOutline();
+    drawFoldLines();
+    drawKeys();
+    drawFoldText();
+
+    drawTemplateOutline2();
+    drawKeys2();
+    drawDividers();
+    drawChords();
+
+
+// main template
+
+function drawTemplateOutline() {
+  c1.beginPath();
+  c1.lineWidth = 4;
+  c1.moveTo(50, 50);
+  c1.lineTo(50, 375);
+  c1.lineTo(950, 375);
+  c1.lineTo(950, 50);
+  c1.lineTo(50, 50);
+  c1.closePath();
+  c1.stroke();
+}
+
+function drawFoldLines() {
+  c1.setLineDash([10]);
+  c1.lineWidth = 2;
+  c1.moveTo(175, 50);
+  c1.lineTo(175, 375);
+  c1.stroke();
+  c1.moveTo(825, 50);
+  c1.lineTo(825, 375);
+  c1.stroke();
+}
+
+function drawKeys() {
+  c1.beginPath();
+  c1.setLineDash([0]);
+  c1.lineWidth = 2;
+  c1.moveTo(268, 50);
+  c1.lineTo(268, 375);
+  c1.moveTo(361, 50);
+  c1.lineTo(361, 375);
+  c1.moveTo(454, 50);
+  c1.lineTo(454, 375);
+  c1.moveTo(547, 50);
+  c1.lineTo(547, 375);
+  c1.moveTo(640, 50);
+  c1.lineTo(640, 375);
+  c1.moveTo(733, 50);
+  c1.lineTo(733, 375);
+  c1.stroke();
+
+  c1.save();
+  c1.textAlign = "center";
+  c1.font = "24pt Arial";
+  c1.fillText("C", 222, 360);
+  c1.restore();
+
+  c1.save();
+  c1.textAlign = "center";
+  c1.font = "24pt Arial";
+  c1.fillText("D", 315, 360);
+  c1.restore();
+
+  c1.save();
+  c1.textAlign = "center";
+  c1.font = "24pt Arial";
+  c1.fillText("E", 408, 360);
+  c1.restore();
+
+  c1.save();
+  c1.textAlign = "center";
+  c1.font = "24pt Arial";
+  c1.fillText("F", 501, 360);
+  c1.restore();
+
+  c1.save();
+  c1.textAlign = "center";
+  c1.font = "24pt Arial";
+  c1.fillText("G", 594, 360);
+  c1.restore();
+
+  c1.save();
+  c1.textAlign = "center";
+  c1.font = "24pt Arial";
+  c1.fillText("A", 687, 360);
+  c1.restore();
+
+  c1.save();
+  c1.textAlign = "center";
+  c1.font = "24pt Arial";
+  c1.fillText("B", 780, 360);
+  c1.restore();
+
+}
+
+function drawFoldText() {
+  c1.save();
+  c1.translate(170, 212);
+  c1.rotate(-Math.PI/2);
+  c1.textAlign = "center";
+  c1.fillText("FOLD", 0, 0);
+  c1.restore();
+
+  c1.save();
+  c1.translate(830, 212);
+  c1.rotate(Math.PI/2);
+  c1.textAlign = "center";
+  c1.fillText("FOLD", 0, 0);
+  c1.restore();
+
+}
+
+  // end main template
+
+  // chord template
+  function drawTemplateOutline2() {
+    c2.beginPath();
+    c2.lineWidth = 4;
+    c2.moveTo(175, 50);
+    c2.lineTo(175, 325);
+    c2.lineTo(825, 325);
+    c2.lineTo(825, 50);
+    c2.lineTo(175, 50);
+    c2.closePath();
+    c2.stroke();
+  }
+
+  function drawKeys2() {
+    c2.beginPath();
+    c2.setLineDash([0]);
+    c2.lineWidth = 2;
+    c2.moveTo(268, 50);
+    c2.lineTo(268, 325);
+    c2.moveTo(361, 50);
+    c2.lineTo(361, 325);
+    c2.moveTo(454, 50);
+    c2.lineTo(454, 325);
+    c2.moveTo(547, 50);
+    c2.lineTo(547, 325);
+    c2.moveTo(640, 50);
+    c2.lineTo(640, 325);
+    c2.moveTo(733, 50);
+    c2.lineTo(733, 325);
+    c2.stroke();
+  }
+
+  function drawDividers() {
+    c2.beginPath();
+    c2.moveTo(175, 142);
+    c2.lineTo(825, 142);
+    c2.moveTo(175, 233);
+    c2.lineTo(825, 233);
+    c2.stroke();
+  }
+
+  function drawChords() {
+    c2.beginPath();
+    c2.arc(222, (325-233)/2 + 233, 15, 0, 2 * Math.PI, false);
+    c2.fill();
+
+    c2.beginPath();
+    c2.arc(408, (325-233)/2 + 233, 15, 0, 2 * Math.PI, false);
+    c2.fill();
+
+    c2.beginPath();
+    c2.arc(594, (325-233)/2 + 233, 15, 0, 2 * Math.PI, false);
+    c2.fill();
+
+      //
+
+      c2.beginPath();
+      c2.arc(222, (233-142)/2 + 142, 15, 0, 2 * Math.PI, false);
+      c2.fill();
+
+      c2.beginPath();
+      c2.arc(501, (233-142)/2 + 142, 15, 0, 2 * Math.PI, false);
+      c2.fill();
+
+      c2.beginPath();
+      c2.arc(687, (233-142)/2 + 142, 15, 0, 2 * Math.PI, false);
+      c2.fill();
+
+      //
+
+      c2.beginPath();
+      c2.arc(315, (142-50)/2 + 50, 15, 0, 2 * Math.PI, false);
+      c2.fill();
+
+      c2.beginPath();
+      c2.arc(594, (142-50)/2 + 50, 15, 0, 2 * Math.PI, false);
+      c2.fill();
+
+      c2.beginPath();
+      c2.arc(780, (142-50)/2 + 50, 15, 0, 2 * Math.PI, false);
+      c2.fill();
+
+    }
+
+
+    </script>
+  </div> <!-- wrapper -- >
+</body>
+</html> 
