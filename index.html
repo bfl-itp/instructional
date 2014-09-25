@@ -1,9 +1,129 @@
+<!--
+
+Though this example includes a lot of words and no pictures, I thought the general format
+was very interesting for guiding people through simple things, especially on a mobile
+device. It is based on the previous project and I would consider the text as
+placeholders for some kind of art + les text.
+
+-->
+
 <!DOCTYPE html>
-<html>
+<html ng-app>
   <head>
-    <title>So-and-so's Instructional Assignment</title>
+    <title>Ben Paster's Instructional Assignment</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <link rel="stylesheet" href="http://api.simpler.im/css/grid.css" media="screen" charset="utf-8">
+  <style>
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
+  h1 {
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 40px;
+  }
+  h2 {
+    margin: 10px;
+    padding: 0;
+    font-weight: 300;
+    font-size: 25px;
+  }
+  .container {
+    width: 960px;
+    margin: 30px auto;
+    max-width: 98%;
+  }
+  .step {
+    background: #f8f8f8;
+    padding: 20px;
+    font-weight: 300;
+    font-size: 25px;
+    line-height: 40px;
+    color: #666;
+    text-align: center;
+  }
+  .step.red {
+    background: #fff2f2 !important;
+  }
+  .step.green {
+    background: #eafce8 !important;
+  }
+  .step strong {
+    font-weight: 500;
+  }
+  .step:hover {
+    cursor: pointer;
+    background: #eee;
+  }
+  </style>
+
   </head>
+
+
   <body>
-    YOUR CODE HERE
+
+    <div class="container">
+
+      <h1 align="center">How To Ride The Subway</h1>
+      <h2 align="center">As you advance, click for the next step in the guide.</h2>
+
+      <div class="row">
+        <div class="step" style="margin-top: 20px;" ng-click="underground = 'true'"><strong>Step One:</strong> Go Underground</div>
+      </div>
+
+      <div ng-show="underground">
+
+        <div class="row">
+          <div class="step"><strong>Step Two:</strong> Follow The Signs Leading To Your Train</div>
+        </div>
+
+        <div class="row">
+          <div class="col-1-2"><div class="step red" ng-click="lost = 'true'">I'm Lost</div></div>
+          <div class="col-1-2"><div class="step green" ng-click="lost = 'false'">Got It!</div></div>
+        </div>
+
+      </div>
+
+      <div class="row" ng-show="lost == 'true'">
+        <div class="col-1-1">
+          <div class="step"><strong>You're Lost?</strong><br />Go back and carefully follow the signs pointing to your train.</div>
+        </div>
+        <div class="col-1-1">
+          <div class="step green" ng-click="lost = 'false'">Got It!</div>
+        </div>
+      </div>
+
+      <div class="row" ng-show="lost == 'false'" ng-click="board = 'true'"><div class="step"><strong>Step Three:</strong> Wait On The Platform For The Next Train</div></div>
+
+      <div class="row" ng-show="board" ng-click="ride = 'true'"><div class="step"><strong>Step Four:</strong> When the train pulls up, be careful not to bump others as you board.</div></div>
+
+      <div ng-show="ride">
+
+        <div class="row">
+          <div class="step"><strong>Step Five:</strong> Watch for your stop! On newer trains, your stop will light up on the boards near the top of the train.</div>
+        </div>
+
+        <div class="row">
+          <div class="col-1-2"><div class="step red" ng-click="missedStop = 'true'">I Missed My Stop</div></div>
+          <div class="col-1-2"><div class="step green" ng-click="missedStop = 'false'">Got It!</div></div>
+        </div>
+
+      </div>
+
+      <div class="row" ng-show="missedStop == 'true'">
+        <div class="col-1-1">
+          <div class="step"><strong>Missed Your Stop?</strong><br />Don't Panic! Look at the map on the subway and find a place that you can transfer to another train. Only turn around if there are no other options.</div>
+        </div>
+        <div class="col-1-1">
+          <div class="step green" ng-click="missedStop = 'false'">Got It!</div>
+        </div>
+      </div>
+
+      <div class="row" ng-show="missedStop == 'false'"><div class="step"><strong>Step Six:</strong> Get off at your stop and enjoy your day!</div></div>
+
+    </div>
+
   </body>
 </html>
