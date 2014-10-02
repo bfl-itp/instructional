@@ -17,5 +17,5 @@ The idea for this project began as a stop motion animation/timelapse video instr
 This web version of the process pairs down the process to key steps, includes short copy to support the visuals as well as links to learn more about and purchase materials.
 
 Here are some photos of my process:
-![shooting1] (/Users/jairwin06/Desktop/BuildingForLearning/instructional/shooting1.JPG)
-![shooting2] (/Users/jairwin06/Desktop/BuildingForLearning/instructional/shooting2.JPG)
+![shooting1] (shooting1.JPG)
+![shooting2] (shooting2.JPG)
