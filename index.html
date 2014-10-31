@@ -1,9 +1,90 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>So-and-so's Instructional Assignment</title>
-  </head>
-  <body>
-    YOUR CODE HERE
-  </body>
+<head>
+
+<title> Mama Knows best!</title>
+
+<style type="text/css">
+body {font-family:Arial, Helvetica, sans-serif; font-size:11px;}
+
+
+.menu {background-color:#b1a16e;border-bottom:1px solid #d7d7d7; height:23px;width:600px;}
+.menu ul {margin:0px; padding:0px; list-style:none; text-align:center;}
+.menu li {display:inline; line-height:23px;}
+.menu li a {color:#ffffff; text-decoration:none; padding:5px 5px 6px 5px; }
+.menu li a.tabactive {border-left:1px solid #d7d7d7; border-right:1px solid #d7d7d7; color:#000000; background-color:#ffffff; font-weight:bold;  position:relative;}
+#tabcontent1,#tabcontent2,#tabcontent3,#tabcontent4,#anothercontent1,#anothercontent2, #anothercontent3, #anothercontent4,#anothercontent5, #anothercontent6, #contentthree1, #contentthree2, #contentthree3 {border:1px solid #ececec; width:500px; text-align:center;padding:6px 0px; font-size:12px; margin-bottom:5px;}
+</style>
+
+
+<script type="text/javascript">
+
+
+//MENU SETTINGS
+//Set the id names of your tablinks (without a number at the end)
+var tablink_idname = new Array("tablink","anotherlink", "linkthree")
+//Set the id names of your tabcontentareas (without a number at the end)
+var tabcontent_idname = new Array("tabcontent","anothercontent", "contentthree") 
+//Set the number of your tabs in each menu
+var tabcount = new Array("4","6","3")
+//Set the Tabs wich should load at start (In this Example:Menu 1 -> Tab 2 visible on load, Menu 2 -> Tab 5 visible on load , Menu 3 -> Tab 1 visible on load)
+var loadtabs = new Array("2","5","1")  
+//Set the Number of the Menu which should autochange (if you dont't want to have a change menu set it to 0)
+var autochangemenu = 2;
+//the speed in seconds when the tabs should change
+var changespeed = 2;
+//should the autochange stop if the user hover over a tab from the autochangemenu? 0=no 1=yes
+var stoponhover = 1;
+//END MENU SETTINGS
+
+
+
+function easytabs(menunr, active) 
+	{if (menunr == autochangemenu){currenttab=active;}if ((menunr == autochangemenu)&&(stoponhover==1)) {stop_autochange()} else if ((menunr == autochangemenu)&&(stoponhover==0))  {counter=0;} menunr = menunr-1;for (i=1; i <= tabcount[menunr]; i++){document.getElementById(tablink_idname[menunr]+i).className='tab'+i;document.getElementById(tabcontent_idname[menunr]+i).style.display = 'none';}document.getElementById(tablink_idname[menunr]+active).className='tab'+active+' tabactive';document.getElementById(tabcontent_idname[menunr]+active).style.display = 'block';}var timer; counter=0; var totaltabs=tabcount[autochangemenu-1];var currenttab=loadtabs[autochangemenu-1];
+
+function start_autochange(){counter=counter+1;timer=setTimeout("start_autochange()",1000);if (counter == changespeed+1) {currenttab++;if (currenttab>totaltabs) {currenttab=1}easytabs(autochangemenu,currenttab);restart_autochange();}}
+function restart_autochange(){clearTimeout(timer);counter=0;start_autochange();}function stop_autochange(){clearTimeout(timer);counter=0;}
+
+window.onload=function(){
+var menucount=loadtabs.length; var a = 0; var b = 1; do {easytabs(b, loadtabs[a]);  a++; b++;}while (b<=menucount);
+if (autochangemenu!=0){start_autochange();}
+}
+
+
+</script>
+</head>
+
+
+<body>
+<h1>How to use 'Mama knows best' mobile app</h1>
+
+
+
+<div class="menu">
+<ul>
+<li><a href="#" onmouseover="easytabs('2', '1');" onfocus="easytabs('2', '1');"  onclick="return false;" title="" id="anotherlink1">1.Start page</a></li>
+<li><a href="#" onmouseover="easytabs('2', '2');" onfocus="easytabs('2', '2');"  onclick="return false;" title="" id="anotherlink2">2.Click "ask"</a></li>
+<li><a href="#" onmouseover="easytabs('2', '3');" onfocus="easytabs('2', '3');"  onclick="return false;" title="" id="anotherlink3">3.Click 'ear'</a></li>
+<li><a href="#" onmouseover="easytabs('2', '4');" onfocus="easytabs('2', '4');"  onclick="return false;" title="" id="anotherlink4">4.Speak</a></li>
+<li><a href="#" onmouseover="easytabs('2', '5');" onfocus="easytabs('2', '5');"  onclick="return false;" title="" id="anotherlink5">5.Getting result </a></li>
+<li><a href="#" onmouseover="easytabs('2', '6');" onfocus="easytabs('2', '6');"  onclick="return false;" title="" id="anotherlink6">6.Your choice</a></li>
+</ul>
+</div>
+
+
+
+<div id="anothercontent1"> <img src="https://reginahjm.files.wordpress.com/2014/10/mama_1login.jpg"> </div>
+
+<div id="anothercontent2"><img src="https://reginahjm.files.wordpress.com/2014/10/mama_2click.gif"></div>
+
+<div id="anothercontent3"><img src="https://reginahjm.files.wordpress.com/2014/10/mama_3clickear.gif"></div>
+
+<div id="anothercontent4"><img src="https://reginahjm.files.wordpress.com/2014/10/mama_4speak.gif"></div>
+
+<div id="anothercontent5"><img src="https://reginahjm.files.wordpress.com/2014/10/mama_5loading.gif"></div>
+
+<div id="anothercontent6"><img src="https://reginahjm.files.wordpress.com/2014/10/mama_6result.gif"></div>
+
+
+<br/><br/>
+
+</body>
 </html>
