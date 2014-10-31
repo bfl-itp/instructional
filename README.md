@@ -4,7 +4,8 @@
 
 > Make a small tutorial or instructional "thing" that could be understood by someone who doesn't speak English. Use any medium/materials/style you want, *other* than a web page: crayon drawing, [aircraft safety card](https://www.google.com/search?q=aircraft+safety+card&tbm=isch), origami, Lego diorama, [IKEA-style manual](http://www.ikea.com/ms/en_US/customer_service/assembly_instructions.html), etc.
 
-Please see my gif UX animation for "mama knows the best"mobile application.  
+Please see my gif UX animation for "mama knows the best"mobile application.
+here <https://reginahjm.files.wordpress.com/2014/10/mama_interaction.gif>  
 This is a concept design app for guiding people to a healthier food choice. 
 We built a character, "mama" which allows users to ask and get feedback on their choices.
  
